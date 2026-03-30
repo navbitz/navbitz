@@ -295,22 +295,6 @@
       box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
     }
 
-    @media (max-width: 768px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-photo {
-        width: 180px;
-        height: 220px;
-        margin: 0 auto;
-      }
-
-      .hero-photo-wrap {
-        display: flex;
-        justify-content: center;
-      }
-    }
 
     .hero-tag {
       display: inline-flex;
@@ -1321,7 +1305,50 @@
       }
 
       #hero {
-        padding: 7rem 1.25rem 4rem
+        padding: 6rem 1.25rem 3rem
+      }
+
+      .hero-inner {
+        display: flex;
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 2.5rem;
+      }
+
+      .hero-actions,
+      .hero-meta {
+        justify-content: center;
+      }
+
+      .hero-photo {
+        width: 180px;
+        height: 220px;
+        margin: 0 auto;
+      }
+
+      .hero-photo-wrap {
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-tag {
+        font-size: 0.65rem !important;
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+        gap: 6px !important;
+        text-transform: none !important;
+        letter-spacing: 0 !important;
+        font-weight: 500 !important;
+        margin-bottom: 1rem !important;
+        box-shadow: none !important;
+        white-space: normal;
+        line-height: 1.4;
+      }
+
+      .hero-tag .status-dot {
+        width: 6px !important;
+        height: 6px !important;
       }
 
       h1.hero-title {
@@ -1332,10 +1359,30 @@
         gap: 1.5rem
       }
 
+      /* Centered Section Headers */
+      .section-head,
+      .certs-head {
+        text-align: center !important;
+      }
+
+      .section-sub {
+        margin: 0.75rem auto 0 !important;
+      }
+
       .about-grid,
       .contact-grid {
         grid-template-columns: 1fr;
-        gap: 3rem
+        gap: 3rem;
+        text-align: center;
+      }
+
+      .about-body {
+        text-align: center;
+      }
+
+      .about-links,
+      .clinks {
+        justify-content: center;
       }
 
       .exp-grid,
@@ -1355,30 +1402,36 @@
       #about,
       #expertise,
       #journey,
-      #contact {
-        padding: 5rem 1.25rem
-      }
-
+      #contact,
       #skills,
       #projects,
       #achievements {
         padding: 5rem 1.25rem
       }
 
+      .proj-archive-link {
+        margin: 0 auto;
+      }
+
       footer {
-        padding: 1.5rem 1.25rem
+        padding: 1.5rem 1.25rem;
+        text-align: center;
       }
 
       .footer-inner {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem
+        align-items: center;
+        gap: 1rem;
       }
     }
 
     @media(max-width:480px) {
+      .hero-tag {
+        font-size: 0.6rem !important;
+      }
+
       h1.hero-title {
-        font-size: 2rem
+        font-size: 1.85rem
       }
 
       .hero-meta {
