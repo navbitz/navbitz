@@ -148,11 +148,29 @@
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
-      letter-spacing: 0.01em
+      letter-spacing: 0.01em;
+      position: relative;
     }
 
     .nav-links a:hover {
       color: var(--text)
+    }
+
+    .nav-links a.active {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 10px;
+      box-shadow: 0 0 10px var(--accent);
     }
 
     .nav-badge {
@@ -811,9 +829,15 @@
 
     /* EXPERTISE */
     #expertise {
-      padding: 7rem 2rem;
+      background: var(--s1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 10rem 2rem;
+    }
+
+    .expertise-inner {
       max-width: 1100px;
-      margin: 0 auto
+      margin: 0 auto;
     }
 
     .exp-grid {
@@ -878,7 +902,6 @@
 
     /* PROJECTS */
     #projects {
-      background: var(--s1);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       padding: 7rem 2rem
@@ -914,7 +937,8 @@
       border: 1px solid var(--border);
       border-radius: 100px;
       transition: all 0.3s ease;
-      background: rgba(13, 17, 23, 0.4);
+      background: rgba(13, 17, 23, 0.2);
+      backdrop-filter: blur(4px);
     }
 
     .proj-archive-link:hover {
@@ -930,7 +954,7 @@
       padding: 1.75rem;
       border: 1px solid var(--border);
       border-radius: 14px;
-      background: rgba(3, 7, 18, 0.7);
+      background: rgba(255, 255, 255, 0.02);
       backdrop-filter: blur(12px);
       transition: all 0.35s ease;
       position: relative;
@@ -1237,6 +1261,59 @@
       opacity: 0.9;
       transform: translateY(-1px);
       box-shadow: 0 8px 24px var(--glow)
+    }
+
+    /* BACK TO TOP */
+    #backToTop {
+      position: fixed;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      width: 48px;
+      height: 48px;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 90;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    #backToTop.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    #backToTop:not(.show) {
+      transform: translateY(30px) scale(0.8);
+    }
+
+    #backToTop:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
+    }
+
+    #backToTop svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      transition: transform 0.3s ease;
+    }
+
+    #backToTop:hover svg {
+      transform: translateY(-2px);
     }
 
     /* FOOTER */
@@ -1550,6 +1627,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#expertise">Expertise</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-badge">Open to Work ↗</a>
@@ -1561,6 +1639,7 @@
     <a href="#about" onclick="closeMenu()">About</a>
     <a href="#expertise" onclick="closeMenu()">Expertise</a>
     <a href="#projects" onclick="closeMenu()">Projects</a>
+    <a href="#certificates" onclick="closeMenu()">Certificates</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
   </div>
 
@@ -1710,70 +1789,54 @@
     </div>
   </section>
 
-  <!-- CERTIFICATES -->
-  <section id="certificates">
-    <div class="certs-head">
-      <span class="section-tag">Certifications</span>
-      <h2 class="section-title">Proof of expertise.</h2>
-      <p class="section-sub" style="margin:0 auto;text-align:center">Certifications earned through structured learning,
-        hands-on projects, and real commitment to mastering each domain.</p>
-    </div>
-    <div class="cert-track-wrap">
-      <div class="cert-track" id="certTrack">
-        <!-- Certificates will be dynamically injected here by Javascript -->
-      </div>
-    </div>
-  </section>
-
-
-
-
   <!-- EXPERTISE -->
   <section id="expertise">
-    <div class="section-head">
-      <span class="section-tag">Expertise Areas</span>
-      <h2 class="section-title">What I bring to the table.</h2>
-      <p class="section-sub">Four core areas backed by real projects, depth, and a genuine passion for building.</p>
-    </div>
-    <div class="exp-grid">
-      <div class="exp-card reveal" data-color="blue">
-        <span class="ec-emoji">🖥️</span>
-        <h3>Information Technology</h3>
-        <p>Solid grounding in networking, operating systems, databases, and IT fundamentals — the infrastructure that
-          sits beneath every application and system.</p>
-        <div class="skill-tags">
-          <span class="stag">Networking</span><span class="stag">Linux</span><span class="stag">Databases</span><span
-            class="stag">OS Concepts</span><span class="stag">Cloud Basics</span>
-        </div>
+    <div class="expertise-inner">
+      <div class="section-head">
+        <span class="section-tag">Expertise Areas</span>
+        <h2 class="section-title">What I bring to the table.</h2>
+        <p class="section-sub">Four core areas backed by real projects, depth, and a genuine passion for building.</p>
       </div>
-      <div class="exp-card reveal" data-color="purple">
-        <span class="ec-emoji">🤖</span>
-        <h3>AI / Machine Learning</h3>
-        <p>End-to-end ML pipeline experience — from raw data preprocessing to model training, evaluation, and
-          deployment. Focused on applied AI that solves real-world problems.</p>
-        <div class="skill-tags">
-          <span class="stag">Python</span><span class="stag">TensorFlow</span><span
-            class="stag">Scikit-learn</span><span class="stag">NumPy</span><span class="stag">Pandas</span>
+      <div class="exp-grid">
+        <div class="exp-card reveal" data-color="blue">
+          <span class="ec-emoji">🖥️</span>
+          <h3>Information Technology</h3>
+          <p>Solid grounding in networking, operating systems, databases, and IT fundamentals — the infrastructure that
+            sits beneath every application and system.</p>
+          <div class="skill-tags">
+            <span class="stag">Networking</span><span class="stag">Linux</span><span class="stag">Databases</span><span
+              class="stag">OS Concepts</span><span class="stag">Cloud Basics</span>
+          </div>
         </div>
-      </div>
-      <div class="exp-card reveal" data-color="cyan">
-        <span class="ec-emoji">💻</span>
-        <h3>Software Development</h3>
-        <p>Strong DSA foundations (500+ problems solved), clean code habits, and hands-on experience building full
-          projects using modern tools and languages.</p>
-        <div class="skill-tags">
-          <span class="stag">C++</span><span class="stag">Python</span><span class="stag">JavaScript</span><span
-            class="stag">Git</span><span class="stag">DSA</span>
+        <div class="exp-card reveal" data-color="purple">
+          <span class="ec-emoji">🤖</span>
+          <h3>AI / Machine Learning</h3>
+          <p>End-to-end ML pipeline experience — from raw data preprocessing to model training, evaluation, and
+            deployment. Focused on applied AI that solves real-world problems.</p>
+          <div class="skill-tags">
+            <span class="stag">Python</span><span class="stag">TensorFlow</span><span
+              class="stag">Scikit-learn</span><span class="stag">NumPy</span><span class="stag">Pandas</span>
+          </div>
         </div>
-      </div>
-      <div class="exp-card reveal" data-color="green">
-        <span class="ec-emoji">🎬</span>
-        <h3>Content &amp; Visual Communication</h3>
-        <p>Technical storytelling through video editing, demo reels, and documented case studies. A creative edge that
-          makes complex engineering work accessible and noticed.</p>
-        <div class="skill-tags">
-          <span class="stag">Video Editing</span><span class="stag">Project Demos</span><span
-            class="stag">Storytelling</span><span class="stag">Documentation</span>
+        <div class="exp-card reveal" data-color="cyan">
+          <span class="ec-emoji">💻</span>
+          <h3>Software Development</h3>
+          <p>Strong DSA foundations (500+ problems solved), clean code habits, and hands-on experience building full
+            projects using modern tools and languages.</p>
+          <div class="skill-tags">
+            <span class="stag">C++</span><span class="stag">Python</span><span class="stag">JavaScript</span><span
+              class="stag">Git</span><span class="stag">DSA</span>
+          </div>
+        </div>
+        <div class="exp-card reveal" data-color="green">
+          <span class="ec-emoji">🎬</span>
+          <h3>Content &amp; Visual Communication</h3>
+          <p>Technical storytelling through video editing, demo reels, and documented case studies. A creative edge that
+            makes complex engineering work accessible and noticed.</p>
+          <div class="skill-tags">
+            <span class="stag">Video Editing</span><span class="stag">Project Demos</span><span
+              class="stag">Storytelling</span><span class="stag">Documentation</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1794,6 +1857,21 @@
       <div class="proj-archive reveal">
         <a href="https://github.com/navbitz" target="_blank" class="proj-archive-link">View Full Project Archive
           →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates">
+    <div class="certs-head">
+      <span class="section-tag">Certifications</span>
+      <h2 class="section-title">Proof of expertise.</h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center">Certifications earned through structured learning,
+        hands-on projects, and real commitment to mastering each domain.</p>
+    </div>
+    <div class="cert-track-wrap">
+      <div class="cert-track" id="certTrack">
+        <!-- Certificates will be dynamically injected here by Javascript -->
       </div>
     </div>
   </section>
@@ -1863,6 +1941,10 @@
       <p>NavBitz · Built with purpose.</p>
     </div>
   </footer>
+
+  <button id="backToTop" aria-label="Back to Top" title="Back to Top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
 
   <script>
     // ==========================================
@@ -2002,10 +2084,55 @@
       });
     });
 
+    // Back to Top Logic
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) { backToTop.classList.add('show') }
+      else { backToTop.classList.remove('show') }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('nav');
       if (window.scrollY > 80) { nav.style.background = 'rgba(3,7,18,0.95)' }
       else { nav.style.background = 'rgba(3,7,18,0.75)' }
+      
+      // Scroll Spy Logic
+      const sections = ['about', 'expertise', 'projects', 'certificates', 'contact'];
+      let current = '';
+      
+      // Check if we are at the very bottom of the page
+      const isBottom = (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 50;
+      
+      if (isBottom) {
+        current = 'contact';
+      } else {
+        sections.forEach(id => {
+          const section = document.getElementById(id);
+          if (section) {
+            const sectionTop = section.offsetTop;
+            if (window.pageYOffset >= sectionTop - 150) {
+              current = id;
+            }
+          }
+        });
+        
+        // Don't highlight if we are still in the Hero section
+        const firstSection = document.getElementById('about');
+        if (firstSection && window.pageYOffset < firstSection.offsetTop - 200) {
+          current = '';
+        }
+      }
+      
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (current && href.includes(current)) {
+          link.classList.add('active');
+        }
+      });
     });
 
     // Contact Form Handler
